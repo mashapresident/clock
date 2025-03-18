@@ -1,6 +1,6 @@
 from datetime import datetime
 import asyncio
-import move_engine  # Припускаємо, що move_engine.step - асинхронна функція
+import move_engine
 import sound
 def get_hour():
     return datetime.now().hour
