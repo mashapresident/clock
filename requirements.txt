@@ -2,3 +2,4 @@ quart
 asyncio
 python-vlc
 pyA20
+hypercorn
