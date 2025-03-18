@@ -38,21 +38,31 @@ gpio.init()
 gpio.setcfg(DIR, gpio.OUTPUT)
 gpio.setcfg(STEP, gpio.OUTPUT)
 gpio.setcfg(EN, gpio.OUTPUT)
+def load_config():
+    """Завантажує конфігурацію з файлу. Якщо файлу немає — створює його із значенням за замовчуванням."""
+    if not os.path.exists(CONFIG_FILE):
+        config = {"steps_per_revolution": 400}
+        with open(CONFIG_FILE, "w") as f:
+            json.dump(config, f)
+        return config
+    else:
+        with open(CONFIG_FILE, "r") as f:
+            return json.load(f)
 
+CONFIG_FILE = os.path.join(os.getcwd(), "config.json")
+config = load_config()
+steps_per_revolution = config.get("steps_per_revolution", 400)
 
 async def step(min):
-    from main import steps_per_revolution
-    """
-    Асинхронна функція для керування кроками двигуна.
-    Блокуючі виклики time.sleep() замінено на await asyncio.sleep().
-    """
+    config = load_config()
+    steps_per_revolution = config.get("steps_per_revolution", 400)
     steps = int(min * (steps_per_revolution/60))
     try:
         if steps > 0:
             gpio.output(DIR, 1)
             for _ in range(int(steps)):
                 gpio.output(STEP, 1)
-                await asyncio.sleep(0.01)  # асинхронна затримка
+                await asyncio.sleep(0.01)
                 gpio.output(STEP, 0)
                 await asyncio.sleep(0.01)
         elif steps < 0:
