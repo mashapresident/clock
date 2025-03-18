@@ -1,0 +1,4 @@
+quart
+asyncio
+python-vlc
+pyA20
