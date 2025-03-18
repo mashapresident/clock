@@ -10,8 +10,8 @@ import time
 import asyncio
 import json
 
-if not os.getegid() == 0:
-    sys.exit('Script must be run as root')
+#if not os.getegid() == 0:
+ #   sys.exit('Script must be run as root')
 
 from pyA20.gpio import gpio, port
 
