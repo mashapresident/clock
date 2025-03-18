@@ -9,7 +9,7 @@ import sys
 import time
 import asyncio
 
-from main import steps_per_revolution
+
 
 if not os.getegid() == 0:
     sys.exit('Script must be run as root')
@@ -41,6 +41,7 @@ gpio.setcfg(EN, gpio.OUTPUT)
 
 
 async def step(min):
+    from main import steps_per_revolution
     """
     Асинхронна функція для керування кроками двигуна.
     Блокуючі виклики time.sleep() замінено на await asyncio.sleep().
