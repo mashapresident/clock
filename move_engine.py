@@ -28,7 +28,7 @@ def millis():
     return time.time() * 1000
 
 # Налаштовуємо GPIO-піни
-DIR = port.PA6   # GPIO2 - Напрямок
+DIR = port.PA2   # GPIO2 - Напрямок
 STEP = port.PA11  # GPIO10 - Імпульси
 EN = port.PA12    # GPIO2
 
