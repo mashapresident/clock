@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/style.css') }}">
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <title>Stepper Motor Control</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Stepper Motor Control</h1>
+
+    <!-- Форма для вводу кількості кроків -->
+    <form id="set_steps" action="/set_steps" method="POST">
+      <label for="steps_per_revolution">Кількість кроків на оберт:</label>
+      <input type="number" id="steps_per_revolution" name="steps_per_revolution" required>
+      <button type="submit">Ввести</button>
+    </form>
+
+    <!-- Форма для калібрування -->
+    <h2>Калібрування стрілок вручну</h2>
+    <form id="calibrate_steps" action="/calibrate" method="POST">
+      <label for="calibration_steps">Кількість кроків для калібрування:</label>
+      <input type="number" id="calibration_steps" name="calibration_steps" required>
+      <button type="submit">Калібрувати</button>
+    </form>
+
+    <!-- Форма для калібрування за часом -->
+    <h2>Калібрування стрілок за часом на годиннику</h2>
+    <form id="calibrate_steps_fact" action="/calibrate_fact" method="POST">
+      <label for="calibration_time">Час на годиннику (гг:хх):</label>
+      <input type="time" id="calibration_time" name="calibration_time" required>
+      <button type="submit">Калібрувати</button>
+    </form>
+
+
+    <!-- Розділ для завантаження аудіо -->
+    <h2>Завантаження аудіо</h2>
+    <div class="audio-uploads">
+      <!-- Форма для завантаження мелодії -->
+        <form id="upload_melodiya" action="/upload_melodiya" method="POST" enctype="multipart/form-data">
+          <div class="drop-item">
+            <!-- Кнопка, яка відкриває діалог вибору файлу, але не надсилає форму -->
+            <button type="button" onclick="document.getElementById('melodiyaFile').click();">Мелодія</button>
+            <input type="file" id="melodiyaFile" name="melodiya" accept="audio/*" style="display: none;" onchange="document.getElementById('upload_melodiya').submit();">
+          </div>
+        </form>
+
+      <!-- Форма для завантаження звуку стуку -->
+      <form id="upload_stuk" action="/upload_stuk" method="POST" enctype="multipart/form-data">
+        <div class="drop-item">
+          <button type="button" onclick="document.getElementById('stukSoundFile').click();">Звук стуку</button>
+          <input type="file" id="stukSoundFile" name="stuk" accept="audio/*" style="display: none;" onchange="document.getElementById('upload_stuk').submit();">
+        </div>
+      </form>
+    </div>
+
+  </div>
+</body>
+</html>
