@@ -41,4 +41,4 @@ async def play(hour):
 # Приклад використання:
 if __name__ == '__main__':
     # Наприклад, потрібно відтворити звук клаку 3 рази після мелодії
-    asyncio.run(play(3))
+    asyncio.run(play())
